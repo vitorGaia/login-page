@@ -18,7 +18,12 @@ const login = async (req, res, next) => {
   }
 };
 
+const getProfile = async (req, res) => {
+  res.status(200).json(req.user);
+};
+
 export default {
   register,
   login,
+  getProfile,
 };
