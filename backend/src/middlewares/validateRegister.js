@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import validationErrorFormatter from './validationErrorFormatter.js';
 
 const registerSchema = Joi.object({
   name: Joi.string().min(5).required().messages({
@@ -18,7 +19,7 @@ const registerSchema = Joi.object({
 const validateRegister = (req, res, next) => {
   const { error } = registerSchema.validate(req.body, { abortEarly: false });
   if (error) {
-    return res.status(400).json({ errors: error.details.map(e => e.message) });
+    return validationErrorFormatter.formatJoiErrorResponse(res, error);
   }
   next();
 };

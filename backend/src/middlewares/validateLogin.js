@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import validationErrorFormatter from './validationErrorFormatter.js';
 
 const loginSchema = Joi.object({
   email: Joi.string().email().required().messages({
@@ -14,9 +15,7 @@ const validateLogin = (req, res, next) => {
   const { error } = loginSchema.validate(req.body);
 
   if (error) {
-    // No login, geralmente é melhor retornar um erro genérico 401,
-    // mas para o desafio, retornar o erro específico do Joi está bom.
-    return res.status(400).json({ errors: error.details.map((e) => e.message) });
+    return validationErrorFormatter.formatJoiErrorResponse(res, error);
   }
 
   next();
