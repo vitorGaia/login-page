@@ -24,12 +24,12 @@ const registerUser = async ({ name, email, password }) => {
 const loginUser = async ({ email, password }) => {
   const user = await userRepository.findUserByEmail(email);
   if (!user) {
-    throw errorMiddleware.createApiError(401, 'Credenciais inválidas');
+    throw errorMiddleware.createApiError(401, 'E-mail ou senha inválidos');
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    throw errorMiddleware.createApiError(401, 'Credenciais inválidas');
+    throw errorMiddleware.createApiError(401, 'E-mail ou senha inválidos');
   }
 
   const payload = { id: user.id, email: user.email };
