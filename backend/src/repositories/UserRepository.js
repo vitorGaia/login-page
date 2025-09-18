@@ -1,4 +1,6 @@
-import User from '../models/User.js';
+import db from '../models/index.js';
+
+const { User } = db;
 
 const createUser = async (userData) => {
   return User.create(userData);
@@ -9,6 +11,6 @@ const findUserByEmail = async (email) => {
 };
 
 export default {
-    createUser,
-    findUserByEmail
+  createUser,
+  findUserByEmail,
 };
