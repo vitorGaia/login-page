@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL;
+import authService from '../services/authService';
 
 const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -11,22 +9,18 @@ const useAuthStore = defineStore('auth', {
   }),
   actions: {
     async login(credentials) {
-      const response = await axios.post(`${API_URL}/login`, credentials);
+      const response = await authService.login(credentials);
       this.token = response.data.token;
       localStorage.setItem('token', this.token);
       this.isAuthenticated = true;
       await this.fetchProfile();
     },
     async register(userData) {
-      await axios.post(`${API_URL}/register`, userData);
+      await authService.register(userData);
     },
     async fetchProfile() {
       if (this.token) {
-        const response = await axios.get(`${API_URL}/profile`, {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-        });
+        const response = await authService.fetchProfile(this.token);
         this.user = response.data;
       }
     },
