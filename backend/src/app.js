@@ -11,7 +11,6 @@ app.use(cors());
 
 app.use('/api', authRoutes);
 
-// Middleware de tratamento de erros (deve ser o último)
 app.use(errorMiddleware.errorHandler);
 
 export default app;
