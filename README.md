@@ -51,24 +51,16 @@ Para iniciar o projeto completo (frontend, backend e banco de dados), você prec
     cd login-page
     ```
 
-2.  **Configurar Variáveis de Ambiente:**
-    *   Crie um arquivo `.env` dentro da pasta `backend/`.
-    *   Adicione as seguintes variáveis (exemplo):
-        ```
-        APP_PORT=3001
-        DB_HOST=db
-        DB_USER=root
-        DB_PASS=root
-        DB_NAME=login_page_db
-        DB_PORT=3306
-        JWT_SECRET=seu_segredo_jwt_aqui
-        BCRYPT_SALT_ROUNDS=10
-        ```
-    *   Crie um arquivo `.env` dentro da pasta `frontend/`.
-    *   Adicione a seguinte variável (exemplo):
-        ```
-        VITE_API_URL=http://localhost:3001/api
-        ```
+2.  **Verificação de Portas:** ⚠️
+    Este projeto utiliza as portas `3306` (MySQL), `3001` (Backend) e `5173` (Frontend). Certifique-se de que essas portas não estejam sendo utilizadas por outros processos em sua máquina. Caso estejam, os serviços Docker não conseguirão iniciar.
+
+    Você pode verificar quais processos estão usando essas portas (no Linux/macOS) com os seguintes comandos:
+    ```bash
+    sudo lsof -i :3306
+    sudo lsof -i :3001
+    sudo lsof -i :5173
+    ```
+    Para liberar uma porta, você pode encerrar o processo que a está utilizando (ex: `sudo kill -9 <PID>`).
 
 3.  **Iniciar os Serviços com Docker Compose:**
     A partir da raiz do projeto, execute o seguinte comando:
@@ -121,6 +113,6 @@ Para iniciar o projeto completo (frontend, backend e banco de dados), você prec
 
 ## 💡 Próximos Passos e Melhorias Potenciais
 
-*   **Testes:** 🧪 Implementar testes unitários e de integração para o frontend e backend.
-*   **UI/UX:** ✨ Aprimorar a interface do usuário com mais feedback visual (loaders, estados de sucesso/erro mais elaborados).
-*   **Funcionalidades:** ➕ Implementar "Esqueceu a senha?", verificação de e-mail, etc.
+*   **Testes:** Implementar testes unitários e de integração para o frontend e backend.
+*   **UI/UX:** Aprimorar a interface do usuário com mais feedback visual (loaders, estados de sucesso/erro mais elaborados).
+*   **Funcionalidades:** Implementar "Esqueceu a senha?", verificação de e-mail, etc.
