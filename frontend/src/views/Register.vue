@@ -3,6 +3,10 @@
     <div class="w-full max-w-md bg-gray-800 rounded-2xl shadow-lg p-8">
       <h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">Cadastro</h2>
       
+      <div v-if="authStore.error" class="text-red-400 p-3 rounded-lg mb-4 text-center">
+        {{ authStore.error }}
+      </div>
+
       <form @submit.prevent="handleRegister" class="space-y-4">
         <div>
           <label for="name" class="block mb-2 text-sm font-medium text-gray-300">Nome</label>
@@ -43,7 +47,7 @@
         <div>
           <button
             type="submit"
-            class="w-full px-4 py-2 text-lg font-semibold text-gray-900 bg-cyan-400 rounded-lg shadow-md hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 transition"
+            class="w-full px-4 py-2 text-lg font-semibold text-gray-900 bg-cyan-400 rounded-lg shadow-md hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 transition mt-6"
           >
             Cadastrar
           </button>
@@ -80,7 +84,7 @@ const handleRegister = async () => {
     router.push('/login');
   } catch (error) {
     console.error('Erro no registro:', error);
-    alert('Erro ao registrar. Verifique os dados e tente novamente.');
+    // Error is now handled by authStore and displayed in UI
   }
 };
 </script>
