@@ -70,7 +70,6 @@ const handleLogin = async () => {
     router.push('/profile');
   } catch (error) {
     console.error('Erro no login:', error);
-    // Error is now handled by authStore and displayed in UI
   }
 };
 </script>

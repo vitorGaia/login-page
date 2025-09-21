@@ -6,7 +6,7 @@ const useAuthStore = defineStore('auth', {
     token: localStorage.getItem('token') || null,
     user: null,
     isAuthenticated: !!localStorage.getItem('token'),
-    error: null, // New error state
+    error: null,
   }),
   actions: {
     setError(message) {
@@ -16,7 +16,7 @@ const useAuthStore = defineStore('auth', {
       this.error = null;
     },
     async login(credentials) {
-      this.clearError(); // Clear previous errors
+      this.clearError();
       try {
         const response = await authService.login(credentials);
         this.token = response.data.token;
@@ -25,16 +25,16 @@ const useAuthStore = defineStore('auth', {
         await this.fetchProfile();
       } catch (error) {
         this.setError(error.response?.data?.message || 'E-mail ou senha inválidos.');
-        throw error; // Re-throw to allow components to handle navigation etc.
+        throw error;
       }
     },
     async register(userData) {
-      this.clearError(); // Clear previous errors
+      this.clearError();
       try {
         await authService.register(userData);
       } catch (error) {
         this.setError(error.response?.data?.message || 'Erro ao registrar. Verifique os dados e tente novamente.');
-        throw error; // Re-throw to allow components to handle navigation etc.
+        throw error;
       }
     },
     async fetchProfile() {
@@ -44,7 +44,7 @@ const useAuthStore = defineStore('auth', {
           this.user = response.data;
         } catch (error) {
           this.setError('Falha ao carregar perfil. Por favor, faça login novamente.');
-          this.logout(); // Log out if profile fetch fails
+          this.logout();
           throw error;
         }
       }
@@ -54,7 +54,7 @@ const useAuthStore = defineStore('auth', {
       this.user = null;
       this.isAuthenticated = false;
       localStorage.removeItem('token');
-      this.clearError(); // Clear errors on logout
+      this.clearError();
     },
   },
 });

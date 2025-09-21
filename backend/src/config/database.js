@@ -12,7 +12,6 @@ const sequelize = new Sequelize(
   }
 );
 
-// Tenta reconectar até o banco ficar disponível
 const waitForDatabase = async (retries = 10, delay = 3000) => {
   for (let i = 0; i < retries; i++) {
     try {

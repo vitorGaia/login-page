@@ -84,7 +84,6 @@ const handleRegister = async () => {
     router.push('/login');
   } catch (error) {
     console.error('Erro no registro:', error);
-    // Error is now handled by authStore and displayed in UI
   }
 };
 </script>
