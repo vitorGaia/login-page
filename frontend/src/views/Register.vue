@@ -81,7 +81,8 @@ const authStore = useAuthStore();
 const handleRegister = async () => {
   try {
     await authStore.register({ name: name.value, email: email.value, password: password.value });
-    router.push('/login');
+    await authStore.login({ email: email.value, password: password.value });
+    router.push('/profile');
   } catch (error) {
     console.error('Erro no registro:', error);
   }
